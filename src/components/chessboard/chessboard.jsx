@@ -5,14 +5,25 @@ import Square from "../square/square";
 export default function Chessboard() {
   const numberRows = 8;
   const numberColumns = 8;
+  const columnsLabel = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
-  function getRow(isFirstWhite) {
+  function getRow(isFirstWhite, putLabel) {
     const squareRow = [];
     for (let i = 0; i < numberColumns; i++) {
       if (isFirstWhite) {
-        squareRow.push(<Square isWhite={i % 2 === 0} />);
+        squareRow.push(
+          <div>
+            <Square isWhite={i % 2 === 0} />
+            {putLabel && columnsLabel[i]}
+          </div>
+        );
       } else {
-        squareRow.push(<Square isWhite={i % 2 === 1} />);
+        squareRow.push(
+          <div>
+            <Square isWhite={i % 2 === 1} />
+            {putLabel && columnsLabel[i]}
+          </div>
+        );
       }
     }
     return squareRow;
@@ -21,7 +32,12 @@ export default function Chessboard() {
   function getBoard() {
     const arr = [];
     for (let i = 0; i < numberRows; i++) {
-      arr.push(getRow(i % 2 === 0));
+      arr.push(
+        <>
+          {numberRows - i}
+          {getRow(i % 2 === 0, i === numberRows - 1)}
+        </>
+      );
     }
     return arr;
   }
