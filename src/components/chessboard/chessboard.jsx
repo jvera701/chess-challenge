@@ -9,22 +9,14 @@ export default function Chessboard() {
 
   function getRow(isFirstWhite, putLabel) {
     const squareRow = [];
+    const colorIndex = isFirstWhite ? 0 : 1;
     for (let i = 0; i < numberColumns; i++) {
-      if (isFirstWhite) {
-        squareRow.push(
-          <div>
-            <Square isWhite={i % 2 === 0} />
-            {putLabel && columnsLabel[i]}
-          </div>
-        );
-      } else {
-        squareRow.push(
-          <div>
-            <Square isWhite={i % 2 === 1} />
-            {putLabel && columnsLabel[i]}
-          </div>
-        );
-      }
+      squareRow.push(
+        <div>
+          <Square isWhite={i % 2 === colorIndex} />
+          {putLabel && columnsLabel[i]}
+        </div>
+      );
     }
     return squareRow;
   }
